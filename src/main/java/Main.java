@@ -4,13 +4,13 @@ public class Main
 {
 	public static void main(String[] args) 
 	{
-	    int[] a={6,7,8,9,10,11};
+	    int[] a={6,7,8,8,9,10,11};
 	    int[] x={6,7,8,9,10,400};
 	    Node<Integer> p=ex1_buildList(a);
 	    Node<Integer> b=ex1_buildList(x);
 	    System.out.println(p);
 	    System.out.println(b);
-	    System.out.println(ex3_sumDistances(p,8));
+	    System.out.println(ex4_ifAllDif(p));
 	}
 	public static Node<Integer> ex1_buildList(int[] arr) //builds list from an array
 	{
@@ -290,13 +290,29 @@ public class Main
                 head=head.getNext();
             }
         }
-        while(head!=null)
+        while(head.getNext()!=null)
         {
             head=head.getNext();
             fakcount++;
-            if(head.getValue()==x)
+            if(x==head.getValue())
                 fakcount=0;
         }
         return count+fakcount;
+    }
+    public static boolean ex4_ifAllDif(Node<Integer> head)
+    {
+        Node<Integer> h=new Node<>(head.getValue(),head.getNext());
+        while(h!=null)
+        {
+            Node<Integer> p=new Node<>(h.getValue(),h.getNext());
+            while(p.getNext()!=null)
+            {
+                p=p.getNext();
+                if(h.getValue()==p.getValue())
+                    return false;
+            }
+            h=h.getNext();
+        }
+        return true;
     }
 }

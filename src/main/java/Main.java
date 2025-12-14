@@ -4,16 +4,13 @@ public class Main
 {
 	public static void main(String[] args) 
 	{
-	    int[] a={6,7,8,9,10};
+	    int[] a={6,7,8,9,10,11};
 	    int[] x={6,7,8,9,10,400};
 	    Node<Integer> p=ex1_buildList(a);
 	    Node<Integer> b=ex1_buildList(x);
 	    System.out.println(p);
 	    System.out.println(b);
-	    Node<Integer> h=ex1_newNode(p,b);
-	    System.out.println(h);
-	    Node<Integer> k=ex2_selectSort(p,b);
-	    System.out.println(k);
+	    System.out.println(ex3_sumDistances(p,8));
 	}
 	public static Node<Integer> ex1_buildList(int[] arr) //builds list from an array
 	{
@@ -273,5 +270,33 @@ public class Main
             }
         }
         return head.getNext();
+    }
+    public static int ex3_sumDistances(Node<Integer> head,int x)
+    {
+        if(ex5a_ifNumIn(x,head)==false)
+            return -1;
+        int count=0;
+        int fakcount=0;
+        boolean i=true;;
+        while(i==true)
+        {
+            if(head.getValue()==x)
+            {
+                i=false;
+            }
+            else
+            {
+                count++;
+                head=head.getNext();
+            }
+        }
+        while(head!=null)
+        {
+            head=head.getNext();
+            fakcount++;
+            if(head.getValue()==x)
+                fakcount=0;
+        }
+        return count+fakcount;
     }
 }

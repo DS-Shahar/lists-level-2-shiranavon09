@@ -315,4 +315,30 @@ public class Main
         }
         return true;
     }
+	public static Node<Integer> ex5_onceInNode(Node<Integer> head)
+    {
+        if(head==null)
+            return null;
+        Node<Integer> h=new Node<>(head.getValue(), null);
+        Node<Integer> tail=h;
+        head=head.getNext();
+        while(head!=null)
+        {
+            boolean found=false;
+            Node<Integer> p=h;
+            while(p!=null)
+            {
+                if(p.getValue().equals(head.getValue()))
+                    found=true;
+                p=p.getNext();
+            }
+            if(found==false)
+            {
+                tail.setNext(new Node<>(head.getValue(), null));
+                tail=tail.getNext();
+            }
+            head=head.getNext();
+        }
+        return h;
+    }
 }
